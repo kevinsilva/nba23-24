@@ -1,9 +1,11 @@
+import TeamsList from './components/teamsList';
+
 import './App.css';
 
 function App() {
   return (
     <>
-      <p>Hello World</p>
+      <TeamsList />
     </>
   );
 }
