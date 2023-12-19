@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Navigation from '../components/navigation';
 import Main from '../components/main';
+import { act } from 'react-dom/test-utils';
 
 describe('Navigation', () => {
   it('renders all navigation links', () => {
@@ -37,7 +38,9 @@ describe('Navigation', () => {
 
     const links = screen.getAllByRole('listitem');
     const teamsLink = links[0];
-    teamsLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    act(() => {
+      teamsLink.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
     const teamText = await screen.findByText(/team 1/i);
     expect(teamText).toBeInTheDocument();
   });
