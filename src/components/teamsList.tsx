@@ -1,35 +1,18 @@
-import { useEffect, useState } from 'react';
-import { getTeams } from '../utils/api';
-import { TeamsTypes } from '../utils/types';
+import { useDataContext } from '../context/dataContext';
+import { Link } from 'react-router-dom';
 
 export default function TeamsList() {
-  const [teams, setTeams] = useState<TeamsTypes[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const teamsResponse = await getTeams();
-        setTeams(teamsResponse);
-      } catch (error) {
-        setError('Error fetching teams. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTeams();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
+  const { teams, loading, error } = useDataContext();
 
   return (
     <div>
-      {error && <div>{error}</div>}
-      {/* {JSON.stringify(teams, null, 2)} */}
+      {error.teams && <div>{error.teams}</div>}
+      {loading.teams && <div>Loading...</div>}
       <ol>
         {teams.map((team) => (
-          <li key={team.id}>{team.full_name}</li>
+          <li key={team.id}>
+            <Link to={`/teams/${team.id}/roster`}>{team.full_name}</Link>
+          </li>
         ))}
       </ol>
     </div>

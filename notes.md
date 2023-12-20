@@ -48,3 +48,18 @@ Displays navigation with active home/teams
 A input text field filters by team name
 If name does not correspond -> show no team available with that name
 Clicking on a team redirects to \_\_ (either roster or games)
+
+{JSON.stringify(teams, null, 2)}
+
+### Roster
+
+Displays selected team or pre-defined team.
+Displays navigation with active roster.
+An input text field filters by player's name.
+If name does not correspond -> show no player available with that name
+Clicking on a player redirects to \_\_ (stats)
+
+How to fetch players from a given team?
+
+- Api returns list of all players by pages.
+- I can keep fetching until response.data.meta.next_page is null.

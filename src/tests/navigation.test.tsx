@@ -2,14 +2,17 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Navigation from '../components/navigation';
-import Main from '../components/main';
+import Main from '../components/mainContent';
 import { act } from 'react-dom/test-utils';
+import DataContextProvider from '../context/dataContext';
 
 describe('Navigation', () => {
   it('renders all navigation links', () => {
     render(
       <MemoryRouter>
-        <Navigation />
+        <DataContextProvider>
+          <Navigation />
+        </DataContextProvider>
       </MemoryRouter>
     );
 
@@ -19,7 +22,9 @@ describe('Navigation', () => {
   it('renders all navigation links with correct text', () => {
     render(
       <MemoryRouter>
-        <Navigation />
+        <DataContextProvider>
+          <Navigation />
+        </DataContextProvider>
       </MemoryRouter>
     );
 
@@ -32,7 +37,9 @@ describe('Navigation', () => {
   it('navigates to correct page when link is clicked', async () => {
     render(
       <MemoryRouter>
-        <Main />
+        <DataContextProvider>
+          <Main />
+        </DataContextProvider>
       </MemoryRouter>
     );
 

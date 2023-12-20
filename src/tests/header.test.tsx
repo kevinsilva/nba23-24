@@ -2,14 +2,17 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Header from '../components/header';
-import Main from '../components/main';
+import Main from '../components/mainContent';
 import { act } from 'react-dom/test-utils';
+import DataContextProvider from '../context/dataContext';
 
 describe('Header', () => {
   it('renders header text', () => {
     render(
       <MemoryRouter>
-        <Header />
+        <DataContextProvider>
+          <Header />
+        </DataContextProvider>
       </MemoryRouter>
     );
 
@@ -19,7 +22,9 @@ describe('Header', () => {
   it('navigates to correct page when header is clicked', async () => {
     render(
       <MemoryRouter>
-        <Main />
+        <DataContextProvider>
+          <Main />
+        </DataContextProvider>
       </MemoryRouter>
     );
 
