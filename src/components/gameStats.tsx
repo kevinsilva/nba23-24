@@ -4,7 +4,7 @@ import { fetchGameStats } from '../utils/api';
 import { StatsTypes } from '../utils/types';
 
 export default function GameStats() {
-  const { gameId } = useParams<{ gameId: string | undefined }>();
+  const { gameId } = useParams<{ gameId: string }>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [gameStats, setGameStats] = useState<StatsTypes[]>([]);

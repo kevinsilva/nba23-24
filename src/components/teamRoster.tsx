@@ -4,7 +4,7 @@ import { getPlayerId } from '../utils/api';
 import FilterTeams from './filterTeams';
 
 export default function TeamRoster() {
-  const { teamId } = useParams<{ teamId: string | '1' }>();
+  const { teamId } = useParams<{ teamId: string }>();
   const { players, loading, error, setError } = useDataContext();
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ export default function TeamRoster() {
 
   return (
     <div>
-      <FilterTeams teamId={teamId ? teamId : '1'} />
+      <FilterTeams teamId={teamId ?? '1'} />
       {error.players && <div>{error.players}</div>}
       {loading.players && <div>Loading...</div>}
       {filteredTeamPlayers && (

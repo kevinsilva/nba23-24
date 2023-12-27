@@ -4,11 +4,10 @@ import { fetchPlayerStats } from '../utils/api';
 import { useDataContext } from '../context/dataContext';
 import { StatsTypes } from '../utils/types';
 import FilterPlayers from './filterPlayers';
-
-const gamesPerPage = 25;
+import { gamesPerPage, season } from '../utils/utilitary';
 
 export default function PlayerStats() {
-  const { playerId } = useParams<{ playerId: string | undefined }>();
+  const { playerId } = useParams<{ playerId: string }>();
   const { teams } = useDataContext();
   const [playerStats, setPlayerStats] = useState<StatsTypes[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +20,7 @@ export default function PlayerStats() {
       try {
         await fetchPlayerStats({
           playerId,
-          season: '2023',
+          season,
           setPlayerStats,
           setLastPage,
           setLoading,
@@ -52,7 +51,6 @@ export default function PlayerStats() {
       {playerStats.length > 0 && (
         <>
           <div>
-            {/* {JSON.stringify(playerStats[0]['player'], null, 2)} */}
             <FilterPlayers
               teamId={playerStats[0].player.team_id ?? 1}
               playerId={playerId ?? '1'}

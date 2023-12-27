@@ -25,6 +25,8 @@ const api = axios.create({
   },
 });
 
+// TEAMS
+
 export const getTeams = async () => {
   try {
     const { data } = await api.get('/teams');
@@ -33,6 +35,29 @@ export const getTeams = async () => {
     throw new Error('Error fetching teams');
   }
 };
+
+export const fetchTeams = async ({
+  setTeams,
+  setLoading,
+  setError,
+}: FetchTeamsTypes) => {
+  try {
+    const teamsResponse = await getTeams();
+    setTeams(teamsResponse);
+    setLoading((prevState) => ({
+      ...prevState,
+      teams: false,
+    }));
+  } catch (error) {
+    console.error(error);
+    setError((prevState) => ({
+      ...prevState,
+      teams: 'Error fetching teams. Please try again.',
+    }));
+  }
+};
+
+// PLAYERS
 
 export const getAllPlayers = async (page: number) => {
   try {
@@ -60,6 +85,25 @@ export const getPlayerId = async (playerName: string) => {
   }
 };
 
+export const fetchLocalPlayers = async ({
+  setPlayers,
+  setLoading,
+  setError,
+}: FetchLocalPlayersTypes) => {
+  try {
+    setPlayers(ROSTERS);
+    setLoading((prevState) => ({ ...prevState, players: false }));
+  } catch (error) {
+    console.error(error);
+    setError((prevState) => ({
+      ...prevState,
+      players: 'Error fetching players. Please try again.',
+    }));
+  }
+};
+
+// STATS
+
 export const getPlayerStats = async (
   playerId: string | undefined,
   season: string,
@@ -76,6 +120,43 @@ export const getPlayerStats = async (
   }
 };
 
+export const fetchPlayerStats = async ({
+  playerId,
+  season,
+  setPlayerStats,
+  setLastPage,
+  setLoading,
+  setError,
+}: FetchPlayersStatsTypes) => {
+  try {
+    let currentPage = 1;
+    let totalPages = 1;
+    let playerStats: StatsTypes[] = [];
+    while (currentPage <= totalPages) {
+      const playersStatsResponse = await getPlayerStats(
+        playerId,
+        season,
+        currentPage.toString()
+      );
+
+      playerStats = [...playerStats, ...playersStatsResponse.data];
+      totalPages = playersStatsResponse.meta.total_pages;
+      currentPage++;
+    }
+    playerStats.sort((a, b) => {
+      if (!a.game.date || !b.game.date) return 0;
+      return new Date(b.game.date).getTime() - new Date(a.game.date).getTime();
+    });
+
+    setPlayerStats(playerStats);
+    setLastPage(totalPages);
+    setLoading(false);
+  } catch (error) {
+    console.error(error);
+    setError('Error fetching player stats. Please try again.');
+  }
+};
+
 export const getGameStats = async (
   gameId: string | undefined,
   page: string
@@ -88,6 +169,43 @@ export const getGameStats = async (
     throw new Error('Error fetching game stats');
   }
 };
+
+export const fetchGameStats = async ({
+  gameId,
+  setGameStats,
+  setHighStats,
+  setLoading,
+  setError,
+}: FetchGameStatsTypes) => {
+  try {
+    let currentPage = 1;
+    let totalPages = 1;
+    let gameStats: StatsTypes[] = [];
+    while (currentPage <= totalPages) {
+      const gameStatsResponse = await getGameStats(
+        gameId,
+        currentPage.toString()
+      );
+
+      gameStats = [...gameStats, ...gameStatsResponse.data];
+      totalPages = gameStatsResponse.meta.total_pages;
+      currentPage++;
+    }
+    console.log(gameStats);
+    setGameStats(gameStats);
+    setHighStats({
+      pts: getHighestStatPlayer(gameStats, 'pts') as HighStatsTypes,
+      reb: getHighestStatPlayer(gameStats, 'reb') as HighStatsTypes,
+      ast: getHighestStatPlayer(gameStats, 'ast') as HighStatsTypes,
+    });
+    setLoading(false);
+  } catch (error) {
+    console.error(error);
+    setError('Error fetching player stats. Please try again.');
+  }
+};
+
+// GAMES
 
 export const getTeamGames = async (
   teamId: string | undefined,
@@ -102,44 +220,6 @@ export const getTeamGames = async (
     return data;
   } catch (error) {
     throw new Error('Error fetching team games');
-  }
-};
-
-export const fetchTeams = async ({
-  setTeams,
-  setLoading,
-  setError,
-}: FetchTeamsTypes) => {
-  try {
-    const teamsResponse = await getTeams();
-    setTeams(teamsResponse);
-    setLoading((prevState) => ({
-      ...prevState,
-      teams: false,
-    }));
-  } catch (error) {
-    console.error(error);
-    setError((prevState) => ({
-      ...prevState,
-      teams: 'Error fetching teams. Please try again.',
-    }));
-  }
-};
-
-export const fetchLocalPlayers = async ({
-  setPlayers,
-  setLoading,
-  setError,
-}: FetchLocalPlayersTypes) => {
-  try {
-    setPlayers(ROSTERS);
-    setLoading((prevState) => ({ ...prevState, players: false }));
-  } catch (error) {
-    console.error(error);
-    setError((prevState) => ({
-      ...prevState,
-      players: 'Error fetching players. Please try again.',
-    }));
   }
 };
 
@@ -194,77 +274,5 @@ export const fetchTeamGames = async ({
   } catch (error) {
     console.error(error);
     setError('Error fetching team games. Please try again.');
-  }
-};
-
-export const fetchPlayerStats = async ({
-  playerId,
-  season,
-  setPlayerStats,
-  setLastPage,
-  setLoading,
-  setError,
-}: FetchPlayersStatsTypes) => {
-  try {
-    let currentPage = 1;
-    let totalPages = 1;
-    let playerStats: StatsTypes[] = [];
-    while (currentPage <= totalPages) {
-      const playersStatsResponse = await getPlayerStats(
-        playerId,
-        season,
-        currentPage.toString()
-      );
-
-      playerStats = [...playerStats, ...playersStatsResponse.data];
-      totalPages = playersStatsResponse.meta.total_pages;
-      currentPage++;
-    }
-    playerStats.sort((a, b) => {
-      if (!a.game.date || !b.game.date) return 0;
-      return new Date(b.game.date).getTime() - new Date(a.game.date).getTime();
-    });
-
-    setPlayerStats(playerStats);
-    setLastPage(totalPages);
-    setLoading(false);
-  } catch (error) {
-    console.error(error);
-    setError('Error fetching player stats. Please try again.');
-  }
-};
-
-export const fetchGameStats = async ({
-  gameId,
-  setGameStats,
-  setHighStats,
-  setLoading,
-  setError,
-}: FetchGameStatsTypes) => {
-  try {
-    let currentPage = 1;
-    let totalPages = 1;
-    let gameStats: StatsTypes[] = [];
-    while (currentPage <= totalPages) {
-      const gameStatsResponse = await getGameStats(
-        gameId,
-        currentPage.toString()
-      );
-
-      gameStats = [...gameStats, ...gameStatsResponse.data];
-      totalPages = gameStatsResponse.meta.total_pages;
-      currentPage++;
-    }
-    console.log(gameStats);
-    setGameStats(gameStats);
-    setHighStats({
-      pts: getHighestStatPlayer(gameStats, 'pts') as HighStatsTypes,
-      reb: getHighestStatPlayer(gameStats, 'reb') as HighStatsTypes,
-      ast: getHighestStatPlayer(gameStats, 'ast') as HighStatsTypes,
-    });
-    setLoading(false);
-  } catch (error) {
-    console.error(error);
-    setError('Error fetching player stats. Please try again.');
   }
 };

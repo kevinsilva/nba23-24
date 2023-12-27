@@ -1,12 +1,6 @@
 import { StatsTypes } from './types';
-export function getCurrentSeason() {
-  const month = new Date().getMonth();
-  const year = new Date().getFullYear();
-
-  if (month < 7) return year - 1;
-  return year;
-}
-
+export const gamesPerPage = 25;
+export const season = '2023';
 export function getHighestStatPlayer(
   games: StatsTypes[],
   stat: keyof StatsTypes

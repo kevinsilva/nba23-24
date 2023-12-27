@@ -8,13 +8,15 @@ export default function TeamsList() {
     <div>
       {error.teams && <div>{error.teams}</div>}
       {loading.teams && <div>Loading...</div>}
-      <ol>
-        {teams.map((team) => (
-          <li key={team.id}>
-            <Link to={`/teams/${team.id}/roster`}>{team.full_name}</Link>
-          </li>
-        ))}
-      </ol>
+      {!loading.teams && !error.teams && (
+        <ol>
+          {teams.map((team) => (
+            <li key={team.id}>
+              <Link to={`/teams/${team.id}/roster`}>{team.full_name}</Link>
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
   );
 }

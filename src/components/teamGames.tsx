@@ -3,11 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { fetchTeamGames } from '../utils/api';
 import { AllTeamGameTypes, TeamGameTypes } from '../utils/types';
 import FilterTeams from './filterTeams';
-
-const gamesPerPage = 25;
+import { gamesPerPage, season } from '../utils/utilitary';
 
 export default function TeamGames() {
-  const { teamId } = useParams<{ teamId: string | undefined }>();
+  const { teamId } = useParams<{ teamId: string }>();
   const [teamGames, setTeamGames] = useState<AllTeamGameTypes>({
     upcoming: [],
     previous: [],
@@ -23,7 +22,7 @@ export default function TeamGames() {
       try {
         await fetchTeamGames({
           teamId,
-          season: '2023',
+          season,
           setTeamGames,
           setSelectedGames,
           setLastPage,
@@ -63,7 +62,7 @@ export default function TeamGames() {
       {teamGames && (
         <>
           <div>
-            <FilterTeams teamId={teamId ? teamId : '1'} />
+            <FilterTeams teamId={teamId ?? '1'} />
             <button onClick={handleSelectGames}>
               {selectedGames.length > 0 &&
               selectedGames[0].id === teamGames.previous[0].id

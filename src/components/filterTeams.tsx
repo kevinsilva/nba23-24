@@ -25,23 +25,3 @@ export default function FilterTeams({ teamId }: { teamId: string }) {
     </>
   );
 }
-
-// import { useDataContext } from '../context/dataContext';
-
-// export default function FilterTeams(teamId: string) {
-//   const { teams } = useDataContext();
-//   return (
-//     <>
-//       <select>
-//         {teams.map((team) => (
-//           <option
-//             value={team.full_name ? team.full_name : 'team'}
-//             selected={team.id?.toString() === teamId}
-//           >
-//             {team.full_name}
-//           </option>
-//         ))}
-//       </select>
-//     </>
-//   );
-// }
