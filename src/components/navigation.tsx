@@ -10,18 +10,13 @@ export default function Navigation() {
           </Link>
         </li>
         <li>
-          <Link to="/roster" aria-label="Roster">
+          <Link to="/teams/1/roster" aria-label="Roster">
             Roster
           </Link>
         </li>
         <li>
-          <Link to="/games" aria-label="Games">
+          <Link to="/teams/1/games" aria-label="Games">
             Games
-          </Link>
-        </li>
-        <li>
-          <Link to="/stats" aria-label="Stats">
-            Stats
           </Link>
         </li>
       </ul>

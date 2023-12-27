@@ -10,7 +10,7 @@
 - show a team roster
 - stats of a player
 - list all games
-- stats from any game of given team
+- stats from any game of given team (EXTRA)
 
 ## notes
 
@@ -29,37 +29,70 @@ navigation:
 - Home (teams)
 - Roster
 - Games
-- Stats
 
-filtering:
+feature for better UX: filtering.
 
 - every page should include a filtering input
   _filter by_
 - Home: team name
-- Roster: team name and player name
-- Games: team name and date
-- Stats: team name
-  **one or two filtering inputs**
+- Roster: player name
+- Games: team name
 
 ### Home
 
-Displays all teams.
-Displays navigation with active home/teams
-A input text field filters by team name
-If name does not correspond -> show no team available with that name
-Clicking on a team redirects to \_\_ (either roster or games)
+- Displays all teams.
+- Displays navigation with active home/teams.
+- A input text field filters by team's name.
+- If name does not correspond -> show no team available with that name.
+- Clicking on a team redirects to ROSTER.
 
 {JSON.stringify(teams, null, 2)}
 
 ### Roster
 
-Displays selected team or pre-defined team.
-Displays navigation with active roster.
-An input text field filters by player's name.
-If name does not correspond -> show no player available with that name
-Clicking on a player redirects to \_\_ (stats)
+- Displays selected team or pre-defined team.
+- Displays navigation with active roster.
+- An input text field filters by player's name.
+- If name does not correspond -> show no player available with that name
+- Clicking on a player redirects to STATS.
 
-How to fetch players from a given team?
+**problem:**
+API fetches all players from all seasons without filtering params except for player's name.
 
-- Api returns list of all players by pages.
-- I can keep fetching until response.data.meta.next_page is null.
+**solutions**
+
+IDEA 1 - Show All Time Roster.
+REVIEW 1 - No info on season rosters = Confusing for UX + Lots of Requests. Could reduce requests by using pagination, but still bad UX.
+
+IDEA 2 - Fetch Last Match for given team -> grab match ID -> fetch stats for match -> get player's name by team -> present ROSTER for season.
+REVIEW 2 - It would be impractical in terms of performance even by limiting to current season.
+
+IDEA 3 - Manually add current team roster -> Fetch Specific player by player's name.
+REVIEW 3 - Labor intensive.
+
+IDEA 4 - Use another API for fetching team rosters -> Fetch specific player by player's name.
+REVIEW 4 - Challenge of integration could be simple. No objections on requirement's documentation.
+
+CONCLUSION -> Explore IDEA 4. In case of successful integration, it will make for better UX: the trade-off is limiting it for current season because of performance. It is better to have a relative fast usable site with selective info than a slow unusable site with comprehensive info.
+
+### Player stats
+
+Player stats filtered by season
+ID: 17553967
+
+What are the most important stats parameters?
+
+- Scoring - points per game (PPG) -> (pts)
+- Rebounding - rebounds per game (RPG) -> (reb)
+- Assists - assists per game (APG) -> (ast)
+- Defense - steals per game (SPG) -> (stl)
+- Defense - blocks per game (BPG) -> (blk)
+- Shooting - effective field goal (EFG%) -> (fgm | fg3m | fga)
+
+EFG% = (fgm + 0.5 \* fg3m ) / fga
+
+Field Goals Made (fgm)
+Field Goals Attempted (fga)
+Three-Point Field Goals Made (fg3m)
+
+### Games

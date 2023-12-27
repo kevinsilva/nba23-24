@@ -1,10 +1,10 @@
 import { useState, createContext, useContext, useEffect } from 'react';
-import { fetchPlayers, fetchTeams } from '../utils/api';
+import { fetchLocalPlayers, fetchTeams } from '../utils/api';
 import {
   ChildrenTypes,
   ErrorTeamsAndPlayersTypes,
   LoadingTeamsAndPlayersTypes,
-  PlayerTypes,
+  LocalPlayersTypes,
   ReactContextTypes,
   TeamTypes,
 } from '../utils/types';
@@ -12,7 +12,7 @@ import {
 const DataContext = createContext<ReactContextTypes | null>(null);
 
 export default function DataContextProvider({ children }: ChildrenTypes) {
-  const [players, setPlayers] = useState<PlayerTypes[]>([]);
+  const [players, setPlayers] = useState<LocalPlayersTypes[]>([]);
   const [teams, setTeams] = useState<TeamTypes[]>([]);
   const [loading, setLoading] = useState<LoadingTeamsAndPlayersTypes>({
     players: true,
@@ -26,7 +26,7 @@ export default function DataContextProvider({ children }: ChildrenTypes) {
   useEffect(() => {
     const fetchData = async () => {
       await fetchTeams({ setTeams, setLoading, setError });
-      fetchPlayers({ setPlayers, setLoading, setError });
+      fetchLocalPlayers({ setPlayers, setLoading, setError });
     };
     fetchData();
   }, []);
@@ -36,6 +36,7 @@ export default function DataContextProvider({ children }: ChildrenTypes) {
     teams,
     loading,
     error,
+    setError,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
