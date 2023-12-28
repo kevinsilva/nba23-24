@@ -6,7 +6,6 @@ import GameStats from './components/gameStats';
 import Footer from './components/footer';
 import Header from './components/header';
 import TeamsList from './components/teamsList';
-import './App.css';
 
 function App() {
   return (

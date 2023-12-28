@@ -5,7 +5,7 @@ import Navigation from './navigation';
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between mb-24 sm:mb-16">
+    <header className="flex items-center justify-between mt-4 mb-24 sm:mb-16">
       <div className="flex flex-col sm:flex-row sm:items-center relative">
         <Link to="/" aria-label="Home" className="flex items-center gap-1">
           <img

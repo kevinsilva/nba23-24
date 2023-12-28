@@ -183,3 +183,5 @@ export type AllHighKeyStatsTypes = {
 export type StatsLabelsTypes = {
   [key: string]: string;
 };
+
+export type ThemeTypes = 'light' | 'dark';

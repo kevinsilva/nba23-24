@@ -71,16 +71,16 @@ export default function PlayerStats() {
             <div className="flex justify-end mb-8 text-zinc-600 font-light">
               <button
                 onClick={handlePreviousPage}
-                className="text-xl hover:text-zinc-900"
+                className="text-xl hover:text-zinc-900 dark:text-zinc-50 dark:hover:text-zinc-400"
               >
                 <IoIosArrowBack />
               </button>
-              <span className="text-zinc-800">
+              <span className="text-zinc-800 dark:text-zinc-100">
                 {currentPage} of {lastPage} Pages
               </span>
               <button
                 onClick={handleNextPage}
-                className="text-xl hover:text-zinc-900"
+                className="text-xl hover:text-zinc-900 dark:text-zinc-50 dark:hover:text-zinc-400"
               >
                 <IoIosArrowForward />
               </button>

@@ -29,7 +29,7 @@ export default function TeamsList() {
             >
               <Link
                 to={`/teams/${team.id}/roster`}
-                className="font-sans uppercase font-black text-4xl md:text-6xl lg:text-8xl text-zinc-800 hover:opacity-80"
+                className="font-sans uppercase font-black text-4xl md:text-6xl lg:text-8xl text-zinc-800 hover:opacity-80 dark:text-zinc-50"
               >
                 {team.full_name}
               </Link>

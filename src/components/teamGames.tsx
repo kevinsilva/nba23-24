@@ -75,7 +75,7 @@ export default function TeamGames() {
             <div className="flex flex-col relative bottom-2 justify-center">
               <button
                 onClick={handleSelectGames}
-                className="px-2 py-3  border-2 border-zinc-800 text-zinc-800 text-sm font-semibold rounded-md hover:bg-zinc-800 hover:text-zinc-100"
+                className="px-2 py-3  border-2 border-zinc-800 text-zinc-800 text-sm font-semibold rounded-md hover:bg-zinc-800 hover:text-zinc-100 dark:border-zinc-100 dark:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900"
               >
                 {selectedGames.length > 0 &&
                 selectedGames[0].id === teamGames.previous[0].id
@@ -85,17 +85,17 @@ export default function TeamGames() {
               <div className="flex justify-end mt-8 text-zinc-600 font-light">
                 <button
                   onClick={handlePreviousPage}
-                  className="text-xl hover:text-zinc-900"
+                  className="text-xl hover:text-zinc-900 dark:text-zinc-50 dark:hover:text-zinc-400"
                 >
                   <IoIosArrowBack />
                 </button>
-                <span className="text-zinc-800">
+                <span className="text-zinc-800 dark:text-zinc-50">
                   {currentPage} of{' '}
                   {Math.ceil(selectedGames.length / gamesPerPage)} Pages
                 </span>
                 <button
                   onClick={handleNextPage}
-                  className="text-xl hover:text-zinc-900"
+                  className="text-xl hover:text-zinc-900 dark:text-zinc-50 dark:hover:text-zinc-400"
                 >
                   <IoIosArrowForward />
                 </button>

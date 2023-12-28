@@ -29,7 +29,7 @@ export default function FilterPlayers({
       <select
         value={playerName}
         onChange={handleSelectChange}
-        className="bg-zinc-50 text-lg font-black p-2 border-l-[1px] border-transparent focus:border-l-[1px] focus:border-zinc-400 focus:outline-none cursor-pointer hover:opacity-80"
+        className="bg-zinc-50 text-lg font-black p-2 border-l-[1px] border-transparent focus:border-l-[1px] focus:border-zinc-400 focus:outline-none cursor-pointer hover:opacity-80 dark:bg-zinc-900 dark:text-zinc-50"
       >
         {players
           .filter((roster) => roster.id == teamId)[0]
