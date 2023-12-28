@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <Navigation />
       <Routes>
         <Route path="/" element={<TeamsList />} />
         <Route path="/teams/:teamId/roster" element={<TeamRoster />} />

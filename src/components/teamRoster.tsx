@@ -2,6 +2,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDataContext } from '../context/dataContext';
 import { getPlayerId } from '../utils/api';
 import FilterTeams from './filterTeams';
+import ErrorMsg from './errorMsg';
+import Spinner from './spinner';
 
 export default function TeamRoster() {
   const { teamId } = useParams<{ teamId: string }>();
@@ -27,28 +29,34 @@ export default function TeamRoster() {
   };
 
   return (
-    <div>
+    <section className="flex-col items-center">
       <FilterTeams teamId={teamId ?? '1'} />
-      {error.players && <div>{error.players}</div>}
-      {loading.players && <div>Loading...</div>}
+      {loading.players && <Spinner />}
+      {error.players && <ErrorMsg text={error.players} />}
       {filteredTeamPlayers && (
-        <table>
+        <table className="w-11/12 justify-center mx-auto">
           <thead>
-            <tr>
-              <th>Position</th>
-              <th>Name</th>
+            <tr className="uppercase text-zinc-500 text-xs h-10 text-left">
+              <th className="font-light">Name</th>
+              <th className="font-light">Position</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="font-semibold">
             {filteredTeamPlayers.list.map(([name, position]) => (
-              <tr key={name} onClick={() => handleClick(name)}>
-                <td>{position}</td>
-                <td>{name}</td>
+              <tr
+                key={name}
+                onClick={() => handleClick(name)}
+                className="border-y-[1px] border-zinc-400 h-24 w-3/4 cursor-pointer"
+              >
+                <td className="text-4xl font-bold">{name}</td>
+                <td className="font-light text-xl tracking-wide pl-2">
+                  {position}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-    </div>
+    </section>
   );
 }

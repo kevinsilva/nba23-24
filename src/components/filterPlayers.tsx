@@ -25,8 +25,12 @@ export default function FilterPlayers({
   };
 
   return (
-    <>
-      <select value={playerName} onChange={handleSelectChange}>
+    <div className="flex mb-8">
+      <select
+        value={playerName}
+        onChange={handleSelectChange}
+        className="bg-zinc-50 text-lg font-black p-2 border-l-[1px] border-transparent focus:border-l-[1px] focus:border-zinc-400 focus:outline-none"
+      >
         {players
           .filter((roster) => roster.id == teamId)[0]
           .list.map((player) => (
@@ -35,6 +39,6 @@ export default function FilterPlayers({
             </option>
           ))}
       </select>
-    </>
+    </div>
   );
 }

@@ -5,6 +5,10 @@ import { useDataContext } from '../context/dataContext';
 import { StatsTypes } from '../utils/types';
 import FilterPlayers from './filterPlayers';
 import { gamesPerPage, season } from '../utils/utilitary';
+import ErrorMsg from './errorMsg';
+import Spinner from './spinner';
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 
 export default function PlayerStats() {
   const { playerId } = useParams<{ playerId: string }>();
@@ -46,11 +50,11 @@ export default function PlayerStats() {
 
   return (
     <>
-      {error && <div>{error}</div>}
-      {loading && <div>Loading...</div>}
+      {loading && <Spinner />}
+      {error && <ErrorMsg text={error} />}
       {playerStats.length > 0 && (
         <>
-          <div>
+          <div className="flex items-center justify-between">
             <FilterPlayers
               teamId={playerStats[0].player.team_id ?? 1}
               playerId={playerId ?? '1'}
@@ -59,67 +63,78 @@ export default function PlayerStats() {
                 'name'
               }
             />
-            <button onClick={handlePreviousPage}>Previous Page</button>
-            <span>
-              {currentPage} of {lastPage}
-            </span>
-            <button onClick={handleNextPage}>Next Page</button>
+            <div className="flex justify-end mb-8 text-zinc-600 font-light">
+              <button onClick={handlePreviousPage} className="text-xl">
+                <IoIosArrowBack />
+              </button>
+              <span className="text-zinc-800">
+                {currentPage} of {lastPage} Pages
+              </span>
+              <button onClick={handleNextPage} className="text-xl">
+                <IoIosArrowForward />
+              </button>
+            </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Game</th>
-                <th>Score</th>
-                <th>A</th>
-                <th>MIN</th>
-                <th>PTS</th>
-                <th>REB</th>
-                <th>AST</th>
-                <th>BLK</th>
-                <th>STL</th>
-                <th>FGM</th>
-                <th>FG3M</th>
-                <th>FGA</th>
-              </tr>
-            </thead>
-            <tbody>
-              {playerStats
-                .slice(
-                  (currentPage - 1) * gamesPerPage,
-                  currentPage * gamesPerPage
-                )
-                .map((data) => (
-                  <tr key={data.id}>
-                    <td>
-                      {
-                        teams.filter(
-                          (team) => team.id === data.game.home_team_id
-                        )[0].full_name
-                      }{' '}
-                      vs{' '}
-                      {
-                        teams.filter(
-                          (team) => team.id === data.game.visitor_team_id
-                        )[0].full_name
-                      }
-                    </td>
-                    <td>
-                      {data.game.home_team_score}-{data.game.visitor_team_score}
-                    </td>
-                    <td>{data.game.date}</td>
-                    <td>{data.min}</td>
-                    <td>{data.pts}</td>
-                    <td>{data.reb}</td>
-                    <td>{data.ast}</td>
-                    <td>{data.blk}</td>
-                    <td>{data.stl}</td>
-                    <td>{data.fgm}</td>
-                    <td>{data.fg3m}</td>
-                    <td>{data.fga}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <div className="overflow-x-auto">
+            <table className="w-11/12 justify-center mx-auto">
+              <thead>
+                <tr className="uppercase text-zinc-500 text-xs h-10 text-left">
+                  <th className="font-light pr-4">Game</th>
+                  <th className="font-light pr-4">Score</th>
+                  <th className="font-light pr-4">MIN</th>
+                  <th className="font-light pr-4">PTS</th>
+                  <th className="font-light pr-4">REB</th>
+                  <th className="font-light pr-4">AST</th>
+                  <th className="font-light pr-4">BLK</th>
+                  <th className="font-light pr-4">STL</th>
+                  <th className="font-light pr-4">FGM</th>
+                  <th className="font-light pr-4">FG3M</th>
+                  <th className="font-light pr-4">FGA</th>
+                </tr>
+              </thead>
+              <tbody className="font-semibold">
+                {playerStats
+                  .slice(
+                    (currentPage - 1) * gamesPerPage,
+                    currentPage * gamesPerPage
+                  )
+                  .map((data) => (
+                    <tr
+                      key={data.id}
+                      className="border-y-[1px] border-zinc-400 h-24 w-3/4 text-xl font-light"
+                    >
+                      <td className="text-3xl font-bold mr-4 whitespace-no-wrap min-w-[40rem]">
+                        {
+                          teams.filter(
+                            (team) => team.id === data.game.home_team_id
+                          )[0].full_name
+                        }{' '}
+                        vs{' '}
+                        {
+                          teams.filter(
+                            (team) => team.id === data.game.visitor_team_id
+                          )[0].full_name
+                        }
+                      </td>
+
+                      <td className="pr-4">
+                        {data.game.home_team_score}-
+                        {data.game.visitor_team_score}
+                      </td>
+                      <td className="pr-4">{data.min}</td>
+                      <td className="pr-4">{data.pts}</td>
+                      <td className="pr-4">{data.reb}</td>
+                      <td className="pr-4">{data.ast}</td>
+                      <td className="pr-4">{data.blk}</td>
+                      <td className="pr-4">{data.stl}</td>
+                      <td className="pr-4">{data.fgm}</td>
+                      <td className="pr-4">{data.fg3m}</td>
+                      <td className="pr-4">{data.fga}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
     </>

@@ -145,7 +145,7 @@ export type FetchTeamGamesTypes = {
 export type FetchGameStatsTypes = {
   gameId: string | undefined;
   setGameStats: React.Dispatch<React.SetStateAction<StatsTypes[]>>;
-  setHighStats: React.Dispatch<React.SetStateAction<AllHighStatsTypes>>;
+  setHighStats: React.Dispatch<React.SetStateAction<AllHighKeyStatsTypes>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
@@ -170,4 +170,16 @@ export type AllHighStatsTypes = {
   pts: HighStatsTypes;
   reb: HighStatsTypes;
   ast: HighStatsTypes;
+};
+
+export type AllHighKeyStatsTypes = {
+  [key: string]: {
+    player: string;
+    value: number;
+    teamId: number;
+  };
+};
+
+export type StatsLabelsTypes = {
+  [key: string]: string;
 };
