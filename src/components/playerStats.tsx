@@ -69,13 +69,19 @@ export default function PlayerStats() {
               }
             />
             <div className="flex justify-end mb-8 text-zinc-600 font-light">
-              <button onClick={handlePreviousPage} className="text-xl">
+              <button
+                onClick={handlePreviousPage}
+                className="text-xl hover:text-zinc-900"
+              >
                 <IoIosArrowBack />
               </button>
               <span className="text-zinc-800">
                 {currentPage} of {lastPage} Pages
               </span>
-              <button onClick={handleNextPage} className="text-xl">
+              <button
+                onClick={handleNextPage}
+                className="text-xl hover:text-zinc-900"
+              >
                 <IoIosArrowForward />
               </button>
             </div>
@@ -106,9 +112,9 @@ export default function PlayerStats() {
                   .map((data) => (
                     <tr
                       key={data.id}
-                      className="border-y-[1px] border-zinc-400 h-24 w-3/4 text-xl font-light"
+                      className="border-y-[1px] border-zinc-400 h-24 w-3/4 text-lg sm:text-xl font-light"
                     >
-                      <td className="text-3xl font-bold mr-4 whitespace-no-wrap min-w-[40rem]">
+                      <td className="text-xl sm:text-3xl font-bold mr-4 whitespace-no-wrap min-w-[25rem] sm:min-w-[40rem]">
                         {
                           teams.filter(
                             (team) => team.id === data.game.home_team_id
@@ -122,7 +128,7 @@ export default function PlayerStats() {
                         }
                       </td>
 
-                      <td className="pr-4">
+                      <td className="pr-4 min-w-[6rem]">
                         {data.game.home_team_score}-
                         {data.game.visitor_team_score}
                       </td>

@@ -70,12 +70,12 @@ export default function TeamGames() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: 'easeIn', delay: 0.2 }}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mt-10 sm:mt-0">
             <FilterTeams teamId={teamId ?? '1'} />
             <div className="flex flex-col relative bottom-2 justify-center">
               <button
                 onClick={handleSelectGames}
-                className="px-2 py-3  border-2 border-zinc-800 text-zinc-800 text-sm font-semibold rounded-md"
+                className="px-2 py-3  border-2 border-zinc-800 text-zinc-800 text-sm font-semibold rounded-md hover:bg-zinc-800 hover:text-zinc-100"
               >
                 {selectedGames.length > 0 &&
                 selectedGames[0].id === teamGames.previous[0].id
@@ -83,14 +83,20 @@ export default function TeamGames() {
                   : 'Previous Games'}
               </button>
               <div className="flex justify-end mt-8 text-zinc-600 font-light">
-                <button onClick={handlePreviousPage} className="text-xl">
+                <button
+                  onClick={handlePreviousPage}
+                  className="text-xl hover:text-zinc-900"
+                >
                   <IoIosArrowBack />
                 </button>
                 <span className="text-zinc-800">
                   {currentPage} of{' '}
                   {Math.ceil(selectedGames.length / gamesPerPage)} Pages
                 </span>
-                <button onClick={handleNextPage} className="text-xl">
+                <button
+                  onClick={handleNextPage}
+                  className="text-xl hover:text-zinc-900"
+                >
                   <IoIosArrowForward />
                 </button>
               </div>
@@ -112,22 +118,28 @@ export default function TeamGames() {
                 .map((game) => (
                   <tr
                     key={game.id}
-                    className="border-y-[1px] border-zinc-400 h-24 w-3/4 cursor-pointer"
+                    className="border-y-[1px] border-zinc-400 h-24 w-3/4 cursor-pointer hover:opacity-80"
                   >
                     <td>
-                      <Link to={`/games/${game.id}/stats`}>
+                      <Link
+                        to={
+                          game.home_team_score
+                            ? `/games/${game.id}/stats`
+                            : `/teams/${teamId}/games`
+                        }
+                      >
                         <span className="text-xl font-light mr-4">
                           {game.date &&
                             game.date.slice(5, 10).replace('-', '/')}
                         </span>
-                        <span className="text-4xl font-bold">
+                        <span className="text-xl sm:text-4xl font-bold">
                           {Number(teamId) === game.home_team.id
                             ? game.visitor_team.full_name
                             : game.home_team.full_name}
                         </span>
                       </Link>
                     </td>
-                    <td className="text-4xl font-bold">
+                    <td className="text-lg sm:text-4xl font-bold">
                       {checkIfTeamWon(game, Number(teamId)) === null
                         ? ''
                         : checkIfTeamWon(game, Number(teamId))

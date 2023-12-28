@@ -52,10 +52,10 @@ export default function TeamRoster() {
               <tr
                 key={name}
                 onClick={() => handleClick(name)}
-                className="border-y-[1px] border-zinc-400 h-24 w-3/4 cursor-pointer"
+                className="border-y-[1px] border-zinc-400 h-24 w-3/4 cursor-pointer hover:opacity-80"
               >
-                <td className="text-4xl font-bold">{name}</td>
-                <td className="font-light text-xl tracking-wide pl-2">
+                <td className="text-2xl sm:text-4xl font-bold">{name}</td>
+                <td className="font-light text-lg sm:text-xl tracking-wide pl-2">
                   {position}
                 </td>
               </tr>

@@ -53,17 +53,17 @@ export default function GameStats() {
         >
           {Object.keys(highStats).map((key) => (
             <li key={key} className="flex flex-col">
-              <span className="uppercase font-light text-xl mb-2 text-zinc-900">
+              <span className="uppercase font-light text-lg sm:text-xl mb-2 text-zinc-900">
                 {statsLabels[key]}
               </span>
-              <span className="font-bold text-6xl mb-2 last:mb-0">
+              <span className="font-bold text-4xl sm:text-6xl mb-2 last:mb-0">
                 {highStats[key].player}{' '}
                 <span className="font-light text-zinc-500">
                   {highStats[key].value}
                 </span>
               </span>
 
-              <span className="text-4xl font-medium mb-16 text-zinc-400">
+              <span className="text-2xl sm:text-4xl font-medium mb-16 text-zinc-400">
                 {getTeamNameById(teams, highStats[key].teamId)}
               </span>
             </li>
