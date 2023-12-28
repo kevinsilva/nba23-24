@@ -9,6 +9,7 @@ import ErrorMsg from './errorMsg';
 import Spinner from './spinner';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
+import { motion } from 'framer-motion';
 
 export default function PlayerStats() {
   const { playerId } = useParams<{ playerId: string }>();
@@ -53,7 +54,11 @@ export default function PlayerStats() {
       {loading && <Spinner />}
       {error && <ErrorMsg text={error} />}
       {playerStats.length > 0 && (
-        <>
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: 'easeIn', delay: 0.2 }}
+        >
           <div className="flex items-center justify-between">
             <FilterPlayers
               teamId={playerStats[0].player.team_id ?? 1}
@@ -135,7 +140,7 @@ export default function PlayerStats() {
               </tbody>
             </table>
           </div>
-        </>
+        </motion.section>
       )}
     </>
   );

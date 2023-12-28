@@ -70,3 +70,13 @@ export const statsLabels: StatsLabelsTypes = {
   reb: 'High Rebounds',
   ast: 'High Assists',
 };
+
+export const teamsContainerAnimation = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, duration: 1 } },
+};
+
+export const teamsItemAnimation = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 1 } },
+};

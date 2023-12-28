@@ -8,6 +8,7 @@ import ErrorMsg from './errorMsg';
 import Spinner from './spinner';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
+import { motion } from 'framer-motion';
 
 export default function TeamGames() {
   const { teamId } = useParams<{ teamId: string }>();
@@ -60,11 +61,15 @@ export default function TeamGames() {
   };
 
   return (
-    <div>
+    <section>
       {loading && <Spinner />}
       {error && <ErrorMsg text={error} />}
-      {teamGames && (
-        <>
+      {teamGames.upcoming.length > 0 && teamGames.previous.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeIn', delay: 0.2 }}
+        >
           <div className="flex items-center justify-between">
             <FilterTeams teamId={teamId ?? '1'} />
             <div className="flex flex-col relative bottom-2 justify-center">
@@ -134,8 +139,8 @@ export default function TeamGames() {
                 ))}
             </tbody>
           </table>
-        </>
+        </motion.div>
       )}
-    </div>
+    </section>
   );
 }

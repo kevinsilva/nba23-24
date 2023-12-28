@@ -4,6 +4,7 @@ import { getPlayerId } from '../utils/api';
 import FilterTeams from './filterTeams';
 import ErrorMsg from './errorMsg';
 import Spinner from './spinner';
+import { motion } from 'framer-motion';
 
 export default function TeamRoster() {
   const { teamId } = useParams<{ teamId: string }>();
@@ -29,7 +30,12 @@ export default function TeamRoster() {
   };
 
   return (
-    <section className="flex-col items-center">
+    <motion.section
+      className="flex-col items-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeIn', delay: 0.2 }}
+    >
       <FilterTeams teamId={teamId ?? '1'} />
       {loading.players && <Spinner />}
       {error.players && <ErrorMsg text={error.players} />}
@@ -57,6 +63,6 @@ export default function TeamRoster() {
           </tbody>
         </table>
       )}
-    </section>
+    </motion.section>
   );
 }

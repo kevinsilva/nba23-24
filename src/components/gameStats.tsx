@@ -10,6 +10,7 @@ import {
 } from '../utils/utilitary';
 import ErrorMsg from './errorMsg';
 import Spinner from './spinner';
+import { motion } from 'framer-motion';
 
 export default function GameStats() {
   const { gameId } = useParams<{ gameId: string }>();
@@ -44,7 +45,12 @@ export default function GameStats() {
       {loading && <Spinner />}
       {error && <ErrorMsg text={error} />}
       {!error && gameStats.length > 0 && (
-        <ol className="flex flex-col items-center justify-center text-center">
+        <motion.ol
+          className="flex flex-col items-center justify-center text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: 'easeIn', delay: 0.2 }}
+        >
           {Object.keys(highStats).map((key) => (
             <li key={key} className="flex flex-col">
               <span className="uppercase font-light text-xl mb-2 text-zinc-900">
@@ -62,7 +68,7 @@ export default function GameStats() {
               </span>
             </li>
           ))}
-        </ol>
+        </motion.ol>
       )}
     </>
   );
