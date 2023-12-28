@@ -40,8 +40,6 @@ The `GameStats` component displays high-level statistics for a specific NBA game
 
 The `PlayerStats` component offers detailed statistics for a selected NBA player. It fetches player stats using the `useParams` and `useDataContext` hooks, supporting pagination for an organized and chronological display of the player's performance over multiple games.
 
-This project uses data from [Free-NBA](https://rapidapi.com/theapiguy/api/free-nba) to display NBA games data. In order to maintain a level of user experience I have decided to refer to current season data for two main reasons: less requests from a limiting free API and cleaner, concise information. This [React's](https://react.dev/) project uses [TypeScript](https://www.typescriptlang.org/) for code robustness. Navigations use [react-router-dom](https://www.npmjs.com/package/react-router-dom). Animations are done with [Framer-Motion](https://www.framer.com/motion/) and test with [React-Testing-Library](https://testing-library.com/docs/react-testing-library/intro/) and [MSW](https://mswjs.io/).
-
 ## Development
 
 To install the component, clone repository, change into directory on the terminal and install with npm.
