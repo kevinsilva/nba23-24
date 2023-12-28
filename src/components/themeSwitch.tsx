@@ -36,7 +36,7 @@ export default function ThemeSwitch() {
 
   return (
     <button
-      className="fixed top-[0.5rem] right-[1.7rem] text-5xl opacity-80 z-[51] transition-all"
+      className="absolute top-[0.5rem] right-[1.7rem] text-5xl opacity-80 z-[51] transition-all"
       onClick={handleThemeSwitch}
     >
       {theme === 'light' ? (
