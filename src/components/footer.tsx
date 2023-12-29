@@ -4,7 +4,7 @@ export default function Footer() {
       <small>
         &copy;{new Date().getFullYear()} Kevin Silva.{' '}
         <span className="text-xs">
-          Built width React & TypeScript, Tailwind CSS, and Framer Motion.
+          Built with React & TypeScript, Tailwind CSS, and Framer Motion.
         </span>
       </small>
     </footer>

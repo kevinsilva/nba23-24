@@ -53,7 +53,7 @@ export default function GameStats() {
         >
           {Object.keys(highStats).map((key) => (
             <li key={key} className="flex flex-col">
-              <span className="uppercase font-light text-lg sm:text-xl mb-2 text-zinc-900">
+              <span className="uppercase font-light text-lg sm:text-xl mb-2 text-zinc-900 dark:text-zinc-200">
                 {statsLabels[key]}
               </span>
               <span className="font-bold text-4xl sm:text-6xl mb-2 last:mb-0">
