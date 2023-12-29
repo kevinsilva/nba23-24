@@ -191,7 +191,6 @@ export const fetchGameStats = async ({
       totalPages = gameStatsResponse.meta.total_pages;
       currentPage++;
     }
-    console.log(gameStats);
     setGameStats(gameStats);
     setHighStats({
       pts: getHighestStatPlayer(gameStats, 'pts') as HighStatsTypes,
@@ -266,7 +265,6 @@ export const fetchTeamGames = async ({
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
-    console.log(teamGames);
     setTeamGames(teamGames);
     setSelectedGames(teamGames.previous);
     setLastPage(totalPages);
