@@ -231,6 +231,7 @@ export const fetchTeamGames = async ({
   setLoading,
   setError,
 }: FetchTeamGamesTypes) => {
+  setLoading(true);
   try {
     let currentPage = 1;
     let totalPages = 1;
