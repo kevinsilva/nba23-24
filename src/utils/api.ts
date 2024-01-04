@@ -113,7 +113,6 @@ export const getPlayerStats = async (
     const { data } = await api.get(
       `/stats?player_ids[]=${playerId}&seasons[]=${season}&page=${page}`
     );
-    console.log(data.data);
     return data;
   } catch (error) {
     throw new Error('Error fetching player stats');
@@ -215,7 +214,6 @@ export const getTeamGames = async (
     const { data } = await api.get(
       `/games?team_ids[]=${teamId}&seasons[]=${season}&page=${page}`
     );
-    console.log(data.data);
     return data;
   } catch (error) {
     throw new Error('Error fetching team games');
@@ -227,7 +225,6 @@ export const fetchTeamGames = async ({
   season,
   setTeamGames,
   setSelectedGames,
-  setLastPage,
   setLoading,
   setError,
 }: FetchTeamGamesTypes) => {
@@ -268,7 +265,6 @@ export const fetchTeamGames = async ({
 
     setTeamGames(teamGames);
     setSelectedGames(teamGames.previous);
-    setLastPage(totalPages);
     setLoading(false);
   } catch (error) {
     console.error(error);

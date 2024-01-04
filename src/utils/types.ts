@@ -137,7 +137,6 @@ export type FetchTeamGamesTypes = {
   season: string;
   setTeamGames: React.Dispatch<React.SetStateAction<AllTeamGameTypes>>;
   setSelectedGames: React.Dispatch<React.SetStateAction<TeamGameTypes[]>>;
-  setLastPage: React.Dispatch<React.SetStateAction<number>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
 };

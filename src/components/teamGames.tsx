@@ -17,7 +17,6 @@ export default function TeamGames() {
     previous: [],
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedGames, setSelectedGames] = useState<TeamGameTypes[]>([]);
@@ -30,7 +29,6 @@ export default function TeamGames() {
           season,
           setTeamGames,
           setSelectedGames,
-          setLastPage,
           setLoading,
           setError,
         });
