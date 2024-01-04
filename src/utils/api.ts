@@ -127,6 +127,7 @@ export const fetchPlayerStats = async ({
   setLoading,
   setError,
 }: FetchPlayersStatsTypes) => {
+  setLoading(true);
   try {
     let currentPage = 1;
     let totalPages = 1;
