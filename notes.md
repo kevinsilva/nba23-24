@@ -95,4 +95,7 @@ Field Goals Made (fgm)
 Field Goals Attempted (fga)
 Three-Point Field Goals Made (fg3m)
 
-### Games
+#####
+
+- remove BI logo.
+- correct page bug on teamgames.

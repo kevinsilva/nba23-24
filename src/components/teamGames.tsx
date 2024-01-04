@@ -43,7 +43,7 @@ export default function TeamGames() {
   }, [teamId]);
 
   const handleNextPage = () => {
-    if (currentPage === lastPage) return;
+    if (currentPage === Math.ceil(selectedGames.length / gamesPerPage)) return;
     setCurrentPage((prevState) => prevState + 1);
   };
 
