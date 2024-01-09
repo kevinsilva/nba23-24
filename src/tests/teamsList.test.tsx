@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import TeamsList from '../components/teamsList';
-import { server } from '../mocks/server';
+import { server } from './mocks/server';
 import { HttpResponse, http } from 'msw';
 import DataContextProvider from '../context/dataContext';
 import { MemoryRouter } from 'react-router-dom';

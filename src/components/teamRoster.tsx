@@ -5,11 +5,16 @@ import FilterTeams from './filterTeams';
 import ErrorMsg from './errorMsg';
 import Spinner from './spinner';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 export default function TeamRoster() {
   const { teamId } = useParams<{ teamId: string }>();
   const { players, loading, error, setError } = useDataContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   const filteredTeamPlayers = players.filter(
     (team) => team.id === parseInt(teamId || '1')
