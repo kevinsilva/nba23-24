@@ -13,7 +13,7 @@ import {
 import { ROSTERS } from '../data/rosters';
 import { getHighestStatPlayer } from './utilitary';
 
-const APIKEY = 'f50a47a7ddmsh482e257a603d514p106077jsn56e5e9623fd3';
+const APIKEY = '2ed5e3f924mshf966ff956a5976dp187686jsnbe137b82ec85';
 
 const api = axios.create({
   baseURL: '/api',
