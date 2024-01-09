@@ -13,7 +13,7 @@ import {
 import { ROSTERS } from '../data/rosters';
 import { getHighestStatPlayer } from './utilitary';
 
-const APIKEY = '2ed5e3f924mshf966ff956a5976dp187686jsnbe137b82ec85';
+const APIKEY = import.meta.env.VITE_APP_API_KEY;
 
 const api = axios.create({
   baseURL: '/api',
