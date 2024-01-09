@@ -94,8 +94,3 @@ EFG% = (fgm + 0.5 \* fg3m ) / fga
 Field Goals Made (fgm)
 Field Goals Attempted (fga)
 Three-Point Field Goals Made (fg3m)
-
-#####
-
-- remove BI logo.
-- move mocks to tests folder
