@@ -16,7 +16,7 @@ import { getHighestStatPlayer } from './utilitary';
 const APIKEY = import.meta.env.VITE_APP_API_KEY;
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://free-nba.p.rapidapi.com',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

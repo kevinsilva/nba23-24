@@ -50,7 +50,6 @@ describe('Navigation', () => {
       <MemoryRouter>
         <DataContextProvider>
           <Navigation />
-          {/* <Main /> */}
           <TeamsList />
         </DataContextProvider>
       </MemoryRouter>
