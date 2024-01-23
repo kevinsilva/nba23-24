@@ -37,7 +37,7 @@ export default function PlayerStats() {
       }
     };
     fetchData();
-  }, [playerId, lastPage]);
+  }, [playerId]);
 
   const handleNextPage = () => {
     if (currentPage === lastPage) return;
