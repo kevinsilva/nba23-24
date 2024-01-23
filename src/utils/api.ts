@@ -141,7 +141,9 @@ export const fetchPlayerStats = async ({
       );
 
       playerStats = [...playerStats, ...playersStatsResponse.data];
-      totalPages = playersStatsResponse.meta.total_pages;
+      totalPages = playersStatsResponse.meta.next_page
+        ? (totalPages += 1)
+        : totalPages;
       currentPage++;
     }
     playerStats.sort((a, b) => {
@@ -164,7 +166,6 @@ export const getGameStats = async (
 ) => {
   try {
     const { data } = await api.get(`/stats?game_ids[]=${gameId}&page=${page}`);
-    console.log(data.data);
     return data;
   } catch (error) {
     throw new Error('Error fetching game stats');
@@ -189,7 +190,9 @@ export const fetchGameStats = async ({
       );
 
       gameStats = [...gameStats, ...gameStatsResponse.data];
-      totalPages = gameStatsResponse.meta.total_pages;
+      totalPages = gameStatsResponse.meta.next_page
+        ? (totalPages += 1)
+        : totalPages;
       currentPage++;
     }
     setGameStats(gameStats);
@@ -251,7 +254,9 @@ export const fetchTeamGames = async ({
           teamGames.previous.push(game);
         }
       });
-      totalPages = teamGamesResponse.meta.total_pages;
+      totalPages = teamGamesResponse.meta.next_page
+        ? (totalPages += 1)
+        : totalPages;
       currentPage++;
     }
 

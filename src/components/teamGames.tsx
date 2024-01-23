@@ -40,6 +40,8 @@ export default function TeamGames() {
     fetchData();
   }, [teamId]);
 
+  const totalPages = Math.ceil(selectedGames.length / gamesPerPage);
+
   const handleNextPage = () => {
     if (currentPage === Math.ceil(selectedGames.length / gamesPerPage)) return;
     setCurrentPage((prevState) => prevState + 1);
@@ -88,8 +90,8 @@ export default function TeamGames() {
                   <IoIosArrowBack />
                 </button>
                 <span className="text-zinc-800 dark:text-zinc-50">
-                  {currentPage} of{' '}
-                  {Math.ceil(selectedGames.length / gamesPerPage)} Pages
+                  {currentPage} of {totalPages}{' '}
+                  {totalPages === 1 ? 'Page' : 'Pages'}
                 </span>
                 <button
                   onClick={handleNextPage}

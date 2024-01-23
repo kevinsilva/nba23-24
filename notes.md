@@ -94,3 +94,18 @@ EFG% = (fgm + 0.5 \* fg3m ) / fga
 Field Goals Made (fgm)
 Field Goals Attempted (fga)
 Three-Point Field Goals Made (fg3m)
+
+### API PROBLEMS
+
+## JAN 24
+
+API is not returning total_pages property. Is it temporary?
+In the meanwhile changed this line:
+
+totalPages = teamGamesResponse.meta.total_pages;
+to:
+totalPages = teamGamesResponse.meta.next_page ? (totalPages += 1) : totalPages;
+on:
+fetchTeamGames, line 258
+fetchPlayerStats, line 144
+fetchGameStats, line 195

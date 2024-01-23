@@ -37,7 +37,7 @@ export default function PlayerStats() {
       }
     };
     fetchData();
-  }, [playerId]);
+  }, [playerId, lastPage]);
 
   const handleNextPage = () => {
     if (currentPage === lastPage) return;
@@ -76,7 +76,7 @@ export default function PlayerStats() {
                 <IoIosArrowBack />
               </button>
               <span className="text-zinc-800 dark:text-zinc-100">
-                {currentPage} of {lastPage} Pages
+                {currentPage} of {lastPage} {lastPage > 1 ? 'Pages' : 'Page'}
               </span>
               <button
                 onClick={handleNextPage}
