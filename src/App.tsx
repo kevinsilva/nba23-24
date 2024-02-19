@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Analytics } from '@vercel/analytics/react';
 import TeamRoster from './components/teamRoster';
 import PlayerStats from './components/playerStats';
 import TeamGames from './components/teamGames';
@@ -7,8 +6,10 @@ import GameStats from './components/gameStats';
 import Footer from './components/footer';
 import Header from './components/header';
 import TeamsList from './components/teamsList';
+import useAnalytics from './hooks/useAnalytics';
 
 function App() {
+  useAnalytics();
   return (
     <Router>
       <Header />
@@ -20,7 +21,6 @@ function App() {
         <Route path="/games/:gameId/stats" element={<GameStats />} />
       </Routes>
       <Footer />
-      <Analytics />
     </Router>
   );
 }
