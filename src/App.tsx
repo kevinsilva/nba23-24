@@ -5,7 +5,7 @@ import TeamGames from './components/teamGames';
 import GameStats from './components/gameStats';
 import Footer from './components/footer';
 import Header from './components/header';
-import TeamsList from './components/teamsList';
+// import TeamsList from './components/teamsList';
 import useAnalytics from './analytics/useAnalytics';
 import ErrorMsg from './components/errorMsg';
 
