@@ -6,7 +6,8 @@ import GameStats from './components/gameStats';
 import Footer from './components/footer';
 import Header from './components/header';
 import TeamsList from './components/teamsList';
-import useAnalytics from './hooks/useAnalytics';
+import useAnalytics from './analytics/useAnalytics';
+import ErrorMsg from './components/errorMsg';
 
 function App() {
   useAnalytics();
@@ -14,7 +15,13 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<TeamsList />} />
+        {/* <Route path="/" element={<TeamsList />} /> */}
+        <Route
+          path="/"
+          element={
+            <ErrorMsg text="The API provider is down. Necessary maintenance is ongoing. Please try again later." />
+          }
+        />
         <Route path="/teams/:teamId/roster" element={<TeamRoster />} />
         <Route path="/players/:playerId/stats" element={<PlayerStats />} />
         <Route path="/teams/:teamId/games" element={<TeamGames />} />
