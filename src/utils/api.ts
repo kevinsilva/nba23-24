@@ -16,8 +16,7 @@ import { getHighestStatPlayer } from './utilitary';
 const APIKEY = import.meta.env.VITE_APP_API_KEY;
 
 const api = axios.create({
-  baseURL: '/api', // for vite proxy
-  // baseURL: 'http://api.balldontlie.io/v1',
+  baseURL: 'https://api.balldontlie.io/v1',
   headers: {
     Authorization: APIKEY,
   },
