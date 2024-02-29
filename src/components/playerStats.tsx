@@ -114,17 +114,17 @@ export default function PlayerStats() {
                       key={data.id}
                       className="border-y-[1px] border-zinc-400 h-24 w-3/4 text-lg sm:text-xl font-light"
                     >
-                      <td className="text-xl sm:text-3xl font-bold mr-4 whitespace-no-wrap min-w-[25rem] sm:min-w-[40rem]">
+                      <td className="text-xl sm:text-3xl font-bold mr-4 whitespace-no-wrap min-w-[25rem]">
                         {
                           teams.filter(
                             (team) => team.id === data.game.home_team_id
-                          )[0].full_name
+                          )[0].name
                         }{' '}
                         vs{' '}
                         {
                           teams.filter(
                             (team) => team.id === data.game.visitor_team_id
-                          )[0].full_name
+                          )[0].name
                         }
                       </td>
 

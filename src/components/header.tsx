@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import nbaLogo from '../assets/nba_logo.png';
-import Navigation from './navigationOnError';
-// import Navigation from './navigation';
+import Navigation from './navigation';
 
 export default function Header() {
   return (

@@ -16,13 +16,10 @@ import { getHighestStatPlayer } from './utilitary';
 const APIKEY = import.meta.env.VITE_APP_API_KEY;
 
 const api = axios.create({
-  // baseURL: '/api', // for vite proxy
-  baseURL: 'https://free-nba.p.rapidapi.com',
+  baseURL: '/api', // for vite proxy
+  // baseURL: 'http://api.balldontlie.io/v1',
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'X-RapidAPI-Host': 'free-nba.p.rapidapi.com',
-    'X-RapidAPI-Key': APIKEY,
+    Authorization: APIKEY,
   },
 });
 
@@ -74,10 +71,12 @@ export const getAllPlayers = async (page: number) => {
 };
 
 export const getPlayerId = async (playerName: string) => {
+  const formattedName = playerName.toLowerCase();
   try {
     const { data } = await api.get('/players', {
       params: {
-        search: playerName,
+        first_name: formattedName.split(' ')[0],
+        last_name: formattedName.split(' ')[1],
       },
     });
     return data;
@@ -213,11 +212,11 @@ export const fetchGameStats = async ({
 export const getTeamGames = async (
   teamId: string | undefined,
   season: string,
-  page: string
+  cursor: string | undefined
 ) => {
   try {
     const { data } = await api.get(
-      `/games?team_ids[]=${teamId}&seasons[]=${season}&page=${page}`
+      `/games?team_ids[]=${teamId}&seasons[]=${season}&cursor=${cursor}`
     );
     return data;
   } catch (error) {
@@ -235,18 +234,13 @@ export const fetchTeamGames = async ({
 }: FetchTeamGamesTypes) => {
   setLoading(true);
   try {
-    let currentPage = 1;
-    let totalPages = 1;
+    let cursor: string | undefined = '0';
     const teamGames: AllTeamGameTypes = {
       upcoming: [],
       previous: [],
     };
-    while (currentPage <= totalPages) {
-      const teamGamesResponse = await getTeamGames(
-        teamId,
-        season,
-        currentPage.toString()
-      );
+    while (cursor) {
+      const teamGamesResponse = await getTeamGames(teamId, season, cursor);
       teamGamesResponse.data.forEach((game: TeamGameTypes) => {
         if (game.home_team_score === 0 && game.visitor_team_score === 0) {
           teamGames.upcoming.push(game);
@@ -254,10 +248,8 @@ export const fetchTeamGames = async ({
           teamGames.previous.push(game);
         }
       });
-      totalPages = teamGamesResponse.meta.next_page
-        ? (totalPages += 1)
-        : totalPages;
-      currentPage++;
+      cursor = teamGamesResponse.meta.next_cursor;
+      if (!cursor) break;
     }
 
     teamGames.upcoming.sort((a, b) => {
