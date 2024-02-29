@@ -66,7 +66,7 @@ To run the tests.
 
 The NBA logo used in this project is the intellectual property of the [National Basketball Association](https://www.nba.com/).
 
-Data from [Free-NBA API](https://rapidapi.com/theapiguy/api/free-nba) and references from [Basketball-Reference](https://www.basketball-reference.com/).
+Data from [BALLDONTLIE](https://www.balldontlie.io/) and references from [Basketball-Reference](https://www.basketball-reference.com/).
 
 ## License
 
